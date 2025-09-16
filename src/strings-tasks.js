@@ -20,7 +20,7 @@
  *   getStringLength(undefined) => 0
  */
 function getStringLength(value) {
-  return value.length;
+  return value == null ? 0 : value.length;
 }
 
 /**
@@ -54,7 +54,7 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  return value1 + value2;
+  return value1.concat(value2);
 }
 
 /**
@@ -69,7 +69,7 @@ function concatenateStrings(value1, value2) {
  *   getFirstChar('') => ''
  */
 function getFirstChar(value) {
-  return value[0];
+  return value === '' ? '' : value.charAt(0);
 }
 
 /**
@@ -131,7 +131,7 @@ function removeTrailingWhitespaces(/* value */) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(value, count) {
-  return value.repeat(count);
+  return count <= 0 ? '' : value.repeat(count);
 }
 
 /**
@@ -147,7 +147,10 @@ function repeatString(value, count) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, '');
+  const index = str.indexOf(value);
+  return index === -1
+    ? str
+    : str.slice(0, index) + str.slice(index + value.length);
 }
 
 /**
